@@ -29,10 +29,12 @@ done
 }
 
 #Use case 4
+cnt=0
 while [ $day -lt 20 ]
 do
 	day
-	echo $start
+	arr[$cnt]=$start
+	cnt=$(($cnt + 1))
 	if [ $start -eq 150 ]
 	then 
 		won=$(($won + 50))
@@ -49,3 +51,14 @@ winday=$(($won / $low))
 lostday=$(($lost / $low))
 echo "days of won is $winday"
 echo "days of lost is $lostday"
+
+#Use case 6
+for ((i=0; i<20; i++))
+do
+	if [ ${arr[$i]} -eq $high ]
+	then
+		echo "Luckist day $i"
+	else
+		echo "Unluckist day $i"
+	fi
+done
