@@ -30,6 +30,7 @@ done
 
 #Use case 4
 cnt=0
+month(){
 while [ $day -lt 20 ]
 do
 	day
@@ -45,20 +46,49 @@ do
 done
 echo "Total won amount is $won"
 echo "Total lost amount is $lost"
-
+}
+month
 #Use case 5
+days(){
 winday=$(($won / $low))
 lostday=$(($lost / $low))
 echo "days of won is $winday"
 echo "days of lost is $lostday"
+}
+days
 
 #Use case 6
+findday(){
 for ((i=0; i<20; i++))
 do
 	if [ ${arr[$i]} -eq $high ]
 	then
-		echo "Luckist day $i"
+		echo "Luckist day $(($i + 1))"
 	else
-		echo "Unluckist day $i"
+		echo "Unluckist day $(($i + 1))"
 	fi
+done
+}
+findday
+
+#Use case 7
+while [ true ]
+do
+if [ $winday -gt $lostday ]
+then
+	echo "You are win last month"
+	echo -e "You want to continue...\n1:yes\n2:no"
+	read ch
+	if [ $ch == 'yes' ]
+	then
+		month
+		days
+		findday
+	else
+		exit
+	fi
+else
+	echo "You are lost last month"
+	exit
+fi
 done
