@@ -16,3 +16,10 @@ else
 fi
 }
 
+#Use case 3
+high=$(($start + $(($start / 2))))
+low=$(($start - $(($start / 2))))
+while [ $start -lt $high ] && [ $start -gt $low ]
+do
+	bet
+done
