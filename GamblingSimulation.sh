@@ -1,3 +1,4 @@
+
 #!/bin/bash -x
 
 #Use case 1
@@ -42,3 +43,9 @@ do
 done
 echo "Total won amount is $won"
 echo "Total lost amount is $lost"
+
+#Use case 5
+winday=$(($won / $low))
+lostday=$(($lost / $low))
+echo "days of won is $winday"
+echo "days of lost is $lostday"
