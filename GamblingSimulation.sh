@@ -2,88 +2,89 @@
 #!/bin/bash -x
 
 #Use case 1
-day=0
-start=100
-bet=1
+DAY=0
+START=100
+BET=1
 
 #Use case 2
-bet(){
-r=$((RANDOM % 2))
-if [ $r -eq 1 ]
-then
-	start=$(($start + 1))
-else
-	start=$(($start - 1))
-fi
+Bet(){
+	WIN=$((RANDOM % 2))
+	if [ $WIN -eq 1 ]
+	then
+		START=$(($START + 1))	
+	else
+		START=$(($START - 1))
+	fi
 }
 
 #Use case 3
-high=$(($start + $(($start / 2))))
-low=$(($start - $(($start / 2))))
-day(){
-start=100
-while [ $start -lt $high ] && [ $start -gt $low ]
+HIGH=$(($START + $(($START / 2))))
+LOW=$(($START - $(($START / 2))))
+Day(){
+START=100
+while [ $START -lt $HIGH ] && [ $START -gt $LOW ]
 do
-	bet
+	Bet
 done
 }
 
 #Use case 4
-cnt=0
-month(){
-while [ $day -lt 20 ]
+CNT=0
+Month(){
+while [ $DAY -lt 20 ]
 do
-	day
-	arr[$cnt]=$start
-	cnt=$(($cnt + 1))
-	if [ $start -eq 150 ]
+	Day
+	ARR[$CNT]=$START
+	CNT=$(($CNT + 1))
+	if [ $START -eq 150 ]
 	then 
-		won=$(($won + 50))
+		WON=$(($WON + 50))
 	else
-		lost=$(($lost + 50))
+		LOST=$(($LOST + 50))
 	fi
-	day=$(($day + 1))
+	DAY=$(($DAY + 1))
 done
-echo "Total won amount is $won"
-echo "Total lost amount is $lost"
+echo "Total won amount is $WON"
+echo "Total lost amount is $LOST"
 }
-month
+Month
+
 #Use case 5
-days(){
-winday=$(($won / $low))
-lostday=$(($lost / $low))
-echo "days of won is $winday"
-echo "days of lost is $lostday"
+Days(){
+WIN_DAY=$(($WON / $LOW))
+LOST_DAY=$(($LOST / $LOW))
+echo "days of won is $WIN_DAY"
+echo "days of lost is $LOST_DAY"
 }
-days
+Days
 
 #Use case 6
-findday(){
-for ((i=0; i<20; i++))
+Findday(){
+for ((DAYS=0; DAYS<20; DAYS++))
 do
-	if [ ${arr[$i]} -eq $high ]
+	if [ ${ARR[$DAYS]} -eq $HIGH ]
 	then
-		echo "Luckist day $(($i + 1))"
+		echo "Luckist day $(($DAYS + 1))"
 	else
-		echo "Unluckist day $(($i + 1))"
+		echo "Unluckist day $(($DAYS + 1))"
 	fi
 done
 }
-findday
+Findday
 
 #Use case 7
 while [ true ]
 do
-if [ $winday -gt $lostday ]
+if [ $WIN_DAY -gt $LOST_DAY ]
 then
 	echo "You are win last month"
 	echo -e "You want to continue...\n1:yes\n2:no"
-	read ch
-	if [ $ch == 'yes' ]
+	read CHOICE
+	if [ $CHOICE == 'yes' ]
 	then
-		month
-		days
-		findday
+		Month
+		Days
+		Findday
 	else
 		exit
 	fi
